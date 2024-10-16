@@ -43,7 +43,7 @@ Feature: Test creating a Multianswerrgx (Cloze) question with the create gaps fe
 
     ## Try to create 1/5 gaps with a question text containing 4 words only.
     And I set the field "Question text" to "Once upon a time"
-    And I press "id_button_group_add_gaps_5"    
+    And I press "id_button_group_add_gaps_5"
     Then I should see "Not enough text to create gaps!"
     And I set the field "Question text" to multiline:
     """
