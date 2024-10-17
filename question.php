@@ -114,7 +114,7 @@ class qtype_multianswerrgx_question extends question_graded_automatically_with_c
         }
 
         if (count($this->subquestions) != count($otherversion->subquestions)) {
-            return get_string('regradeissuenumsubquestionschanged', 'qtype_multianswerrgx');
+            return get_string('regradeissuenumsubquestionschanged', 'qtype_multianswer');
         }
 
         foreach ($this->subquestions as $i => $subq) {
@@ -431,7 +431,7 @@ class qtype_multianswerrgx_question extends question_graded_automatically_with_c
         if ($this->is_complete_response($response)) {
             return '';
         }
-        return get_string('pleaseananswerallparts', 'qtype_multianswerrgx');
+        return get_string('pleaseananswerallparts', 'qtype_multianswer');
     }
 
     /**
@@ -622,7 +622,7 @@ class qtype_multianswerrgx_question extends question_graded_automatically_with_c
             $a = new stdClass();
             $a->i = $i;
             $a->response = $subq->summarise_response($substep->filter_array($response));
-            $summary[] = get_string('subqresponse', 'qtype_multianswerrgx', $a);
+            $summary[] = get_string('subqresponse', 'qtype_multianswer', $a);
         }
 
         return implode('; ', $summary);

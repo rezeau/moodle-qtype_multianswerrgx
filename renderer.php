@@ -85,7 +85,7 @@ class qtype_multianswerrgx_renderer extends qtype_renderer {
         }
 
         if ($missingsubquestions) {
-            $output = $this->notification(get_string('corruptedquestion', 'qtype_multianswerrgx'), 'error') . $output;
+            $output = $this->notification(get_string('corruptedquestion', 'qtype_multianswer'), 'error') . $output;
         }
 
         $output = $question->format_text($output, $question->questiontextformat,
@@ -137,7 +137,7 @@ class qtype_multianswerrgx_renderer extends qtype_renderer {
             }
         } else if ($subtype == 'subquestion_replacement') {
             return html_writer::div(
-                get_string('missingsubquestion', 'qtype_multianswerrgx'),
+                get_string('missingsubquestion', 'qtype_multianswer'),
                 'notifyproblem'
             );
         } else {

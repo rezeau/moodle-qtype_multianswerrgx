@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'qtype_multianswerrgx', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'qtype_multianswerrgx', language 'fr', branch 'MOODLE_405_STABLE'
  *
  * @package    qtype_multianswerrgx
  * @subpackage multianswerrgx
@@ -25,9 +25,20 @@
 
 $string['addclozegaps5'] = '1/5 blancs';
 $string['addclozegaps9'] = '1/9 blancs';
-$string['addgaps_help'] = 'Activez la fonction « Ajouter des blancs » pour créer automatiquement des blancs de type SHORTANSWER dans le texte de la question, soit tous les 5 mots, soit tous les 9 mots.';
+$string['addgaps_help'] = 'Activez la fonction «&nbsp;Ajouter des blancs&nbsp;» pour créer automatiquement des blancs de type SHORTANSWER dans le texte de la question, soit tous les 5 mots, soit tous les 9 mots.';
 $string['addgapserror'] = 'Ce texte de question comporte déjà des blancs';
 $string['addgapslabel'] = 'Ajouter des blancs';
-$string['addgapslabel_help'] = 'Ajoute automatiquement des blancs au texte de la question, soit tous les 5 mots, soit tous les 9 mots. N\'utilise que le type de question SHORTANSWER. Remarque : le bouton « Supprimer toutes les lacunes » supprime toutes les sous-questions existantes du texte de la question et réactive les boutons « Ajouter des lacunes ».';
+$string['addgapslabel_help'] = 'Ajoute automatiquement des blancs au texte de la question, soit tous les 5 mots, soit tous les 9 mots. N’utilise que le type de question SHORTANSWER. Remarque : le bouton «&nbsp;Supprimer tous les blancs&nbsp;» supprime toutes les sous-questions existantes du texte de la question et réactive les boutons «&nbsp;Ajouter des blancs&nbsp;&nbsp;».';
+$string['addgapslabelatto'] = 'Pas de blancs ?';
+$string['addgapslabelatto_help'] = 'Si vous souhaitez utiliser la fonction d’ajout automatique de blancs, vous devez passer à l’éditeur TinyMCE dans vos préférences.';
+$string['alternativecorrectanswers'] = 'Réponses alternatives correctes';
+$string['pluginname'] = 'Réponses intégrées avec REGEXP (Clozergx)';
+$string['pluginname_help'] = 'Les questions à réponses intégrées avec REGEXP (Clozergx) consistent en un passage de texte dans lequel sont intégrées des questions à choix multiples, numériques, à réponses courtes et de type REGEXP.';
+$string['pluginname_link'] = 'question/type/multianswerrgx';
+$string['pluginnameadding'] = 'Ajout d’une question à réponse intégrée avec REGEXP (Clozergx)';
+$string['pluginnameediting'] = 'Edition d’une question à réponse intégrée avec REGEXP (Clozergx)';
+$string['pluginnamesummary'] = 'Les questions de ce type ajoutent des questions de type Regexp aux questions à choix multiples, à réponses courtes et aux questions numériques. Le plugin Regexp doit être installé sur votre site Moodle, bien sûr !';
+$string['privacy:metadata'] = 'Le plugin de type de question Réponses intégrées avec REGEXP (Clozergx) ne stocke aucune donnée personnelle.';
 $string['removegaps'] = 'Supprimer tous les blancs';
 $string['skipcapswords'] = 'Ne pas supprimer les noms propres';
+$string['tooshortforgapserror'] = 'Pas assez de texte pour créer des blancs !';

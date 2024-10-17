@@ -875,7 +875,7 @@ function qtype_multianswerrgx_extract_question($text) {
 function qtype_multianswerrgx_validate_question(stdClass $question): array {
     $errors = [];
     if (!isset($question->options->questions)) {
-        $errors['questiontext'] = get_string('questionsmissing', 'qtype_multianswerrgx');
+        $errors['questiontext'] = get_string('questionsmissing', 'qtype_multianswer');
     } else {
         $subquestions = fullclone($question->options->questions);
         if (count($subquestions)) {
@@ -922,7 +922,7 @@ function qtype_multianswerrgx_validate_question(stdClass $question): array {
                 $sub++;
             }
         } else {
-            $errors['questiontext'] = get_string('questionsmissing', 'qtype_multianswerrgx');
+            $errors['questiontext'] = get_string('questionsmissing', 'qtype_multianswer');
         }
     }
     return $errors;

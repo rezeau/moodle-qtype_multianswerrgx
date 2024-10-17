@@ -115,7 +115,7 @@ class qtype_multianswerrgx_qe2_attempt_updater extends question_qtype_attempt_up
             $a = new stdClass();
             $a->i = $i;
             $a->response = $this->to_text($response[$i]);
-            $summary[] = get_string('subqresponse', 'qtype_multianswerrgx', $a);
+            $summary[] = get_string('subqresponse', 'qtype_multianswer', $a);
         }
 
         return implode('; ', $summary);

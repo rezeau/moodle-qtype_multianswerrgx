@@ -202,7 +202,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                         $this->savedquestiondisplay->options->questions[$sub]->qtype != 'subquestion_replacement') {
                     $this->qtypechange = true;
                     $storemess = ' ' . html_writer::tag('span', get_string(
-                            'storedqtype', 'qtype_multianswerrgx', question_bank::get_qtype_name(
+                            'storedqtype', 'qtype_multianswer', question_bank::get_qtype_name(
                                     $this->savedquestiondisplay->options->questions[$sub]->qtype)),
                             ['class' => 'error']);
                 }
@@ -211,7 +211,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                             $this->questiondisplay->options->questions[$sub]->qtype).$storemess);
 
                 $mform->addElement('static', 'sub_'.$sub.'_questiontext',
-                        get_string('questiondefinition', 'qtype_multianswerrgx'));
+                        get_string('questiondefinition', 'qtype_multianswer'));
 
                 if (isset ($this->questiondisplay->options->questions[$sub]->questiontext)) {
                     $mform->setDefault('sub_'.$sub.'_questiontext',
@@ -235,7 +235,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
 
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'multichoice') {
                     $mform->addElement('static', 'sub_'.$sub.'_layout',
-                            get_string('layout', 'qtype_multianswerrgx'));
+                            get_string('layout', 'qtype_multianswer'));
                     $mform->addElement('static', 'sub_'.$sub.'_shuffleanswers',
                             get_string('shuffleanswers', 'qtype_multichoice'));
                 }
@@ -288,42 +288,42 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
             if (($this->negativediff > 0) ||$this->qtypechange ||
                     ($this->usedinquiz && $this->negativediff != 0)) {
                 $mform->addElement('header', 'additemhdr',
-                        get_string('warningquestionmodified', 'qtype_multianswerrgx'));
+                        get_string('warningquestionmodified', 'qtype_multianswer'));
             }
             if ($this->negativediff > 0) {
                 $mform->addElement('static', 'alert1', "<strong>".
-                        get_string('questiondeleted', 'qtype_multianswerrgx')."</strong>",
-                        get_string('questionsless', 'qtype_multianswerrgx', $this->negativediff));
+                        get_string('questiondeleted', 'qtype_multianswer')."</strong>",
+                        get_string('questionsless', 'qtype_multianswer', $this->negativediff));
             }
             if ($this->qtypechange) {
                 $mform->addElement('static', 'alert1', "<strong>".
-                        get_string('questiontypechanged', 'qtype_multianswerrgx')."</strong>",
-                        get_string('questiontypechangedcomment', 'qtype_multianswerrgx'));
+                        get_string('questiontypechanged', 'qtype_multianswer')."</strong>",
+                        get_string('questiontypechangedcomment', 'qtype_multianswer'));
             }
         }
         if ($this->usedinquiz) {
             if ($this->negativediff < 0) {
                 $diff = $countsubquestions - $countsavedsubquestions;
                 $mform->addElement('static', 'alert1', "<strong>".
-                        get_string('questionsadded', 'qtype_multianswerrgx')."</strong>",
-                        "<strong>".get_string('questionsmore', 'qtype_multianswerrgx', $diff).
+                        get_string('questionsadded', 'qtype_multianswer')."</strong>",
+                        "<strong>".get_string('questionsmore', 'qtype_multianswer', $diff).
                         "</strong>");
             }
             $a = new stdClass();
             $a->nb_of_quiz = $this->nbofquiz;
             $a->nb_of_attempts = $this->nbofattempts;
             $mform->addElement('header', 'additemhdr2',
-                    get_string('questionusedinquiz', 'qtype_multianswerrgx', $a));
+                    get_string('questionusedinquiz', 'qtype_multianswer', $a));
             $mform->addElement('static', 'alertas',
-                    get_string('youshouldnot', 'qtype_multianswerrgx'));
+                    get_string('youshouldnot', 'qtype_multianswer'));
         }
         if (($this->negativediff > 0 || $this->usedinquiz &&
                 ($this->negativediff > 0 || $this->negativediff < 0 || $this->qtypechange)) &&
                         $this->reload) {
             $mform->addElement('header', 'additemhdr',
-                    get_string('questionsaveasedited', 'qtype_multianswerrgx'));
+                    get_string('questionsaveasedited', 'qtype_multianswer'));
             $mform->addElement('checkbox', 'confirm', '',
-                    get_string('confirmquestionsaveasedited', 'qtype_multianswerrgx'));
+                    get_string('confirmquestionsaveasedited', 'qtype_multianswer'));
             $mform->setDefault('confirm', 0);
         } else {
             $mform->addElement('hidden', 'confirm', 0);
@@ -439,33 +439,33 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                                 switch ($subquestion->layout) {
                                     case '0':
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutselectinline', 'qtype_multianswerrgx');
+                                            get_string('layoutselectinline', 'qtype_multianswer');
                                         break;
                                     case '1':
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutvertical', 'qtype_multianswerrgx');
+                                            get_string('layoutvertical', 'qtype_multianswer');
                                         break;
                                     case '2':
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layouthorizontal', 'qtype_multianswerrgx');
+                                            get_string('layouthorizontal', 'qtype_multianswer');
                                         break;
                                     default:
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutundefined', 'qtype_multianswerrgx');
+                                            get_string('layoutundefined', 'qtype_multianswer');
                                 }
                             } else {
                                 switch ($subquestion->layout) {
                                     case '1':
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutmultiple_vertical', 'qtype_multianswerrgx');
+                                            get_string('layoutmultiple_vertical', 'qtype_multianswer');
                                         break;
                                     case '2':
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutmultiple_horizontal', 'qtype_multianswerrgx');
+                                            get_string('layoutmultiple_horizontal', 'qtype_multianswer');
                                         break;
                                     default:
                                         $defaultvalues[$prefix.'layout'] =
-                                            get_string('layoutundefined', 'qtype_multianswerrgx');
+                                            get_string('layoutundefined', 'qtype_multianswer');
                                 }
                             }
                             if ($subquestion->shuffleanswers ) {
@@ -547,7 +547,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                 }
             }
         }
-        $defaultvalues['alertas'] = "<strong>".get_string('questioninquiz', 'qtype_multianswerrgx').
+        $defaultvalues['alertas'] = "<strong>".get_string('questioninquiz', 'qtype_multianswer').
                 "</strong>";
 
         if ($defaultvalues != "") {
