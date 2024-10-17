@@ -109,9 +109,9 @@ final class question_test extends \advanced_testcase {
 
         $rightchoice = $question->subquestions[2]->get_correct_response();
 
-        $this->assertEquals(get_string('subqresponse', 'qtype_multianswerrgx',
+        $this->assertEquals(get_string('subqresponse', 'qtype_multianswer',
                 ['i' => 1, 'response' => 'Owl']) . '; ' .
-                get_string('subqresponse', 'qtype_multianswerrgx',
+                get_string('subqresponse', 'qtype_multianswer',
                 ['i' => 2, 'response' => 'Pussy-cat']), $question->summarise_response(
                 ['sub1_answer' => 'Owl', 'sub2_answer' => reset($rightchoice)]));
     }
@@ -300,7 +300,7 @@ final class question_test extends \advanced_testcase {
         unset($newquestion->subquestions[2]);
 
         $this->assertEquals(
-                get_string('regradeissuenumsubquestionschanged', 'qtype_multianswerrgx'),
+                get_string('regradeissuenumsubquestionschanged', 'qtype_multianswer'),
                 $newquestion->validate_can_regrade_with_other_version($question));
     }
 
