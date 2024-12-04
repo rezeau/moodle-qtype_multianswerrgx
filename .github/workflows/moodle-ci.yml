@@ -32,18 +32,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - php: '8.2'
-            moodle-branch: 'main'
-            database: 'mariadb'
-          - php: '8.2'
+          - php: '8.3'
             moodle-branch: 'main'
             database: 'pgsql'
-          - php: '8.1'
-            moodle-branch: 'MOODLE_404_STABLE'
-            database: 'mariadb'
-          - php: '8.2'
-            moodle-branch: 'MOODLE_405_STABLE'
-            database: 'mariadb'
 
     steps:
       - name: Check out repository code
@@ -58,11 +49,12 @@ jobs:
           extensions: ${{ matrix.extensions }}
           ini-values: max_input_vars=5000
           # If you are not using code coverage, keep "none". Otherwise, use "pcov" (Moodle 3.10 and up) or "xdebug".
-          # If you try to use code coverage with "none", it will fallback to phpdbg (which has known problems).
           coverage: none
+
       - name: Initialise moodle-plugin-ci
         run: |
-          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
+          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4          
+          # Add dirs to $PATH
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
           sudo locale-gen en_AU.UTF-8
@@ -82,18 +74,23 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
 
+      - name: PHP Copy/Paste Detector
+        continue-on-error: true # This step will show errors but will not fail
+        if: ${{ always() }}
+        run: moodle-plugin-ci phpcpd
+
       - name: PHP Mess Detector
         continue-on-error: true # This step will show errors but will not fail
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpmd
 
       - name: Moodle Code Checker
-        if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpcs --max-warnings 0
+        if: ${{ always() }}
+        run: moodle-plugin-ci codechecker
 
       - name: Moodle PHPDoc Checker
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpdoc --max-warnings 0
+        run: moodle-plugin-ci phpdoc
 
       - name: Validating
         if: ${{ !cancelled() }}
@@ -120,7 +117,3 @@ jobs:
         id: behat
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci behat --profile chrome
-
-      - name: Mark cancelled jobs as failed.
-        if: ${{ cancelled() }}
-        run: exit 1
