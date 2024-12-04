@@ -31,7 +31,8 @@ require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
  * Unit tests for qtype_multianswerrgx_question.
  *
  * @package    qtype_multianswerrgx
- * @copyright  2011 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers \qtype_multianswerrgx_question
  */

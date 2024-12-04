@@ -17,7 +17,8 @@
  * Backward compatibility file for the old popover.js
  *
  * @module     qtype_multianswerrgx/feedback
- * @copyright  2023 Jun Pataleta <jun@moodle.com>
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on original work by 2023 Jun Pataleta <jun@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

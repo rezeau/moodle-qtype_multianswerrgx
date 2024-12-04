@@ -20,7 +20,8 @@
  * Version dated 18:46 29/06/2024
  *
  * @package    qtype_multianswerrgx
- * @copyright  2007 Jamie Pratt me@jamiep.org
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2007 Jamie Pratt me@jamiep.org
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +33,8 @@ require_once($CFG->dirroot . '/question/type/numerical/questiontype.php');
 /**
  * Form for editing multi-answer questions.
  *
- * @copyright  2007 Jamie Pratt me@jamiep.org
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2007 Jamie Pratt me@jamiep.org
  * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 class qtype_multianswerrgx_edit_form extends question_edit_form {

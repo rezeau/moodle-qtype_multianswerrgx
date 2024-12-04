@@ -34,7 +34,8 @@ require_once($CFG->dirroot . '/question/type/multianswerrgx/questiontype.php');
  * Unit tests for the multianswerrgx question type.
  *
  * @package    qtype_multianswerrgx
- * @copyright  2011 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class walkthrough_test extends \qbehaviour_walkthrough_test_base {

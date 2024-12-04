@@ -18,11 +18,11 @@
  * multianswerrgx question renderer classes.
  * Handle shortanswer, numerical and various multichoice subquestions
  * Hacked version by Joseph Rézeau to include the REGEXP question type.
- * Version dated 18:46 29/06/2024
  *
  * @package    qtype_multianswerrgx
  * @subpackage multianswerrgx
- * @copyright  2010 Pierre Pichet
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2010 Pierre Pichet
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,8 @@ require_once($CFG->dirroot . '/question/type/regexp/renderer.php');
  * the task of display their input elements and status
  * feedback, grade, correct answer(s)
  *
- * @copyright 2010 Pierre Pichet
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2010 Pierre Pichet
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_multianswerrgx_renderer extends qtype_renderer {

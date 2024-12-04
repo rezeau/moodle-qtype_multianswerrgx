@@ -18,7 +18,8 @@
  * Test helpers for the multianswerrgx question type.
  *
  * @package    qtype_multianswerrgx
- * @copyright  2013 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2013 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

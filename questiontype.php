@@ -18,7 +18,8 @@
  * Question type class for the multi-answer question type with regexp question type.
  *
  * @package    qtype_multianswerrgx
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 1999 onwards Martin Dougiamas {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,8 +34,9 @@ require_once($CFG->dirroot . '/question/type/regexp/locallib.php');
 
 /**
  * The multi-answer question type class with regexp.
- *
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * 
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_multianswerrgx extends question_type {

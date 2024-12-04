@@ -19,7 +19,8 @@
  *
  * @package    qtype_multianswerrgx
  * @subpackage multianswerrgx
- * @copyright  2011 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +30,8 @@
  *
  * This class is used by the code in question/engine/upgrade/upgradelib.php.
  *
- * @copyright  2011 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_multianswerrgx_qe2_attempt_updater extends question_qtype_attempt_updater {

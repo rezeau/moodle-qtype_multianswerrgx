@@ -19,7 +19,8 @@
  *
  * @package    qtype_multianswerrgx
  * @subpackage multianswerrgx
- * @copyright  2010 Pierre Pichet
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2010 Pierre Pichet
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -36,7 +37,8 @@ require_once($CFG->dirroot . '/question/type/multichoice/question.php');
  * You can think of it as an application of the composite pattern to qusetion
  * types.
  *
- * @copyright  2010 Pierre Pichet
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2010 Pierre Pichet
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_multianswerrgx_question extends question_graded_automatically_with_countback {

@@ -18,7 +18,7 @@
  * Data to control defaults when creating and running a question
  *
  * @package    qtype_multianswerrgx
- * @copyright  2024 Joseph Rézeau
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

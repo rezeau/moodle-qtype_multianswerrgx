@@ -35,7 +35,8 @@ require_once($CFG->dirroot . '/question/type/multianswerrgx/edit_multianswerrgx_
  * Unit tests for the multianswerrgx question definition class.
  *
  * @package   qtype_multianswerrgx
- * @copyright 2011 The Open University
+ * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
+ * @copyright  based on work by 2011 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers    \qtype_multianswerrgx
  */
