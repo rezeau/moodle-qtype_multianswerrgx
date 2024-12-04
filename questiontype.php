@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/question/type/regexp/locallib.php');
 
 /**
  * The multi-answer question type class with regexp.
- * 
+ *
  * @copyright  2024 Joseph Rézeau <moodle@rezeau.org>
  * @copyright  based on work by 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -389,17 +389,12 @@ class qtype_multianswerrgx extends question_type {
      * @return int The ID of the saved subquestion.
      */
     protected function save_imported_subquestion($fromimport) {
-        global $USER, $DB, $OUTPUT;
+        global $USER;
         $fromimport->stamp = make_unique_id_code();  // Set the unique code (not to be changed).
         $fromimport->createdby = $USER->id;
         $fromimport->timecreated = time();
         $fromimport->modifiedby = $USER->id;
         $fromimport->timemodified = time();
-        $fileoptions = [
-            'subdirs' => true,
-            'maxfiles' => -1,
-            'maxbytes' => 0,
-        ];
         $wrapped = $fromimport;
         $wrapped = question_bank::get_qtype($wrapped->qtype)->save_question(
                         $wrapped, clone($wrapped));
@@ -526,8 +521,7 @@ class qtype_multianswerrgx extends question_type {
      * @param mixed $extra any additional format specific data that may be passed by the format (see format code for info)
      * @return string the data to append to the output buffer or false if error
      */
-    public function export_to_xml($question, qformat_xml $format, $extra = null) {
-        $output = '';
+    public function export_to_xml($question, qformat_xml $format, $extra = null) {        
         $questiontext = $question->questiontext;
         foreach ($question->options->questions as $index => $subq) {
                     $questiontext = str_replace('{#' . $index . '}', $subq->questiontext, $questiontext);
@@ -555,8 +549,7 @@ class qtype_multianswerrgx extends question_type {
         // Access the contents of the questiontext field.
         $questiontextcontent = $data["#"]["questiontext"][0]["#"]["text"][0]["#"];
         // Access the contents of the questiontextrgx field.
-        $questiontextrgxcontent = $data["#"]["questiontextrgx"][0]["#"]["text"][0]["#"];
-        $question->questiontextrgx = $questiontextrgxcontent;
+        $question->questiontextrgx = $data["#"]["questiontextrgx"][0]["#"]["text"][0]["#"];
         return $question;
     }
     /**
