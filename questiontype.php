@@ -521,7 +521,7 @@ class qtype_multianswerrgx extends question_type {
      * @param mixed $extra any additional format specific data that may be passed by the format (see format code for info)
      * @return string the data to append to the output buffer or false if error
      */
-    public function export_to_xml($question, qformat_xml $format, $extra = null) {        
+    public function export_to_xml($question, qformat_xml $format, $extra = null) {
         $questiontext = $question->questiontext;
         foreach ($question->options->questions as $index => $subq) {
                     $questiontext = str_replace('{#' . $index . '}', $subq->questiontext, $questiontext);

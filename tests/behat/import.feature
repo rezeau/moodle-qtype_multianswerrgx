@@ -33,7 +33,9 @@ Feature: Test importing multianswerrgx questions
     And I set the field "id_format_xml" to "1"
     And I press "Export questions to file"
     # And I press "Continue"
-    And following "click here" should download between "1500" and "1800" bytes
+    And following "click here" should download a file that:
+      | Has mimetype                 | text/xml                 |
+      | Contains text in xml element | Cloze with RX complete   |
     # If the download step is the last in the scenario then we can sometimes run
     # into the situation where the download page causes a http redirect but behat
     # has already conducted its reset (generating an error). By putting a logout
