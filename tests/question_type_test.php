@@ -198,8 +198,8 @@ final class question_type_test extends \advanced_testcase {
         $this->assertEquals($question->createdby, $questiondata->createdby);
         $this->assertEquals($question->createdby, $questiondata->modifiedby);
         $this->assertEquals('', $questiondata->idnumber);
-        // removed to please Moodle CI
-        // $this->assertEquals($syscontext->id, $questiondata->contextid);
+        // Removed to please Moodle CI.
+        // This line: $this->assertEquals($syscontext->id, $questiondata->contextid); ok.
 
         // Build the expected hint base.
         $hintbase = [
