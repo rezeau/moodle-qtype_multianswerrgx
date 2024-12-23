@@ -249,9 +249,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                         }
                     }
                     // Output the resulting array
-                    echo '<br><br><br><pre>';
-                    print_r($newArray);
-                    echo '</pre>';
+                    
                     $alternateq = $this->get_alternateanswers($newArray);
                 }
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'multichoice') {
@@ -264,15 +262,15 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                 $alternateqa = [];
                 foreach ($answer->answer as $key => $ans) {
                     $mform->addElement('html', '<hr />');
-                    if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp00' && (count($alternateq) !== 0 )) {
+                    if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp' && (count($alternateq) !== 0 )) {
                         if (!empty($alternateq[$key]) ) {
-                            $alternateqa = $alternateq[$key];
+                            $alternateqa = $alternateq[$key];                            
                         };
-                        $ans0 = $ans;
-                        $ans = has_permutations($ans);
+                        //$ans0 = $ans;
+                        //$ans = has_permutations($ans);
                         $mform->addElement('static', 'sub_'.$sub.'_answer['.$key.']', get_string('answer', 'question').' '
                             .($key + 1).' ('.($answer->fraction[$key] * 100).'%)', $ans);
-                        if ($key !== 0) {
+                        if ($key !== 0 && $ans === $alternateqa['regexp']) {
                             if (count($alternateqa['answers']) > 1) {
                                 $mform->addElement('static', '', get_string('alternativecorrectanswers', 'qtype_multianswerrgx'));
                                 $list = '';
@@ -630,20 +628,12 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
         $alternateanswers = [];
         $i = 1;
         foreach ($answers as $index => $answer) {
-            echo '$answer';
-            echo '<pre>';
-            print_r($answer['answer']);
-            echo '</pre>';
+            
                     // JR added permutations OCT 2012.
                     //$answer = has_permutations($answer);
-                    // End permutations.
-                    
+                    // End permutations.                    
                     $r = expand_regexp($answer['answer']);
-                    echo '<pre>';
-            print_r($r);
-            echo '</pre>';
-                    
-                    if ($r) {                        
+                    if ($r) {
                         $alternateanswers[$i]['fraction'] = (($answer['fraction']) * 100).'%';
                         
                         $alternateanswers[$i]['regexp'] = $answer['answer'];
@@ -652,15 +642,10 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                         } else {
                             $alternateanswers[$i]['answers'][] = $r; // Regexp was not expanded.
                         }
-                        
                     }
-                    
             $i++;
         }
-        echo '<pre>';
-        print_r($alternateanswers);
-        echo '</pre>';
-     //   return $alternateanswers;
+        return $alternateanswers;
     }
 
     /**
