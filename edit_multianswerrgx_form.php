@@ -232,7 +232,27 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                 }
 
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp') {
-                    $alternateq = $this->get_alternateanswers($this->questiondisplay->options->questions[$sub]);
+                    // Pending fixing the validation crash on parentheses: do not use get_alternateanswers.
+                    $alternateq = [];
+                    //$alternateq = $this->get_alternateanswers($this->questiondisplay->options->questions[$sub]);
+                    $answers = $this->questiondisplay->options->questions[$sub];
+                    // Initialize a new array to store the answers and fractions
+                    $newArray = [];
+
+                    // Loop through the answers and fractions and combine them
+                    foreach ($answers->answer as $index => $answer) {
+                        if ($index !== 0 && $answers->fraction[$index] != 0) { // Only include if fraction is not zero
+                            $newArray[] = [
+                                "answer" => $answer,
+                                "fraction" => $answers->fraction[$index]
+                            ];
+                        }
+                    }
+                    // Output the resulting array
+                    echo '<br><br><br><pre>';
+                    print_r($newArray);
+                    echo '</pre>';
+                    $alternateq = $this->get_alternateanswers($newArray);
                 }
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'multichoice') {
                     $mform->addElement('static', 'sub_'.$sub.'_layout',
@@ -244,7 +264,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                 $alternateqa = [];
                 foreach ($answer->answer as $key => $ans) {
                     $mform->addElement('html', '<hr />');
-                    if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp') {
+                    if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp00' && (count($alternateq) !== 0 )) {
                         if (!empty($alternateq[$key]) ) {
                             $alternateqa = $alternateq[$key];
                         };
@@ -609,34 +629,38 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
     public function get_alternateanswers($answers) {
         $alternateanswers = [];
         $i = 1;
-        foreach ($answers->answer as $index => $answer) {
-            $errortext = validate_regexp_subquestion($answer, $answers->fraction[$index]);
-            if ($answers->fraction[$index] > 0) {
-                // This is Answer 1 :: do not process as regular expression.
-                if ($i == 1) {
-                    $alternateanswers[$i]['fraction'] = (($answers->fraction[$index]) * 100).'%';
-                    $alternateanswers[$i]['regexp'] = $answer;
-                    $alternateanswers[$i]['answers'][] = $answer;
-                } else {
-                    $errortext = validate_regexp_subquestion($answer, $answers->fraction[$index]);
+        foreach ($answers as $index => $answer) {
+            echo '$answer';
+            echo '<pre>';
+            print_r($answer['answer']);
+            echo '</pre>';
                     // JR added permutations OCT 2012.
-                    $answer = has_permutations($answer);
+                    //$answer = has_permutations($answer);
                     // End permutations.
-                    $r = expand_regexp($answer);
-                    if ($r) {
-                        $alternateanswers[$i]['fraction'] = (($answers->fraction[$index]) * 100).'%';
-                        $alternateanswers[$i]['regexp'] = $answer;
+                    
+                    $r = expand_regexp($answer['answer']);
+                    echo '<pre>';
+            print_r($r);
+            echo '</pre>';
+                    
+                    if ($r) {                        
+                        $alternateanswers[$i]['fraction'] = (($answer['fraction']) * 100).'%';
+                        
+                        $alternateanswers[$i]['regexp'] = $answer['answer'];
                         if (is_array($r)) {
                             $alternateanswers[$i]['answers'] = $r; // Normal alternateanswers (expanded).
                         } else {
                             $alternateanswers[$i]['answers'][] = $r; // Regexp was not expanded.
                         }
+                        
                     }
-                }
-            }
+                    
             $i++;
         }
-        return $alternateanswers;
+        echo '<pre>';
+        print_r($alternateanswers);
+        echo '</pre>';
+     //   return $alternateanswers;
     }
 
     /**
