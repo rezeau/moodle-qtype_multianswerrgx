@@ -266,11 +266,17 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                         if (!empty($alternateq[$key]) ) {
                             $alternateqa = $alternateq[$key];                            
                         };
-                        //$ans0 = $ans;
-                        //$ans = has_permutations($ans);
+                        $ans0 = $ans;
+                        $ans = has_permutations($ans);
                         $mform->addElement('static', 'sub_'.$sub.'_answer['.$key.']', get_string('answer', 'question').' '
                             .($key + 1).' ('.($answer->fraction[$key] * 100).'%)', $ans);
                         if ($key !== 0 && $ans === $alternateqa['regexp']) {
+                            if ($ans !== $ans0) {
+                                $mform->addElement('html', '<div class="developedanswersrgx">');
+                                $mform->addElement('static', '', get_string('developedanswer', 'qtype_multianswerrgx')
+                                    .' ', $alternateqa['regexp']);
+                                $mform->addElement('html', '</div>');
+                            }
                             if (count($alternateqa['answers']) > 1) {
                                 $mform->addElement('static', '', get_string('alternativecorrectanswers', 'qtype_multianswerrgx'));
                                 $list = '';
@@ -630,7 +636,7 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
         foreach ($answers as $index => $answer) {
             
                     // JR added permutations OCT 2012.
-                    //$answer = has_permutations($answer);
+                    $answer['answer'] = has_permutations($answer['answer']);
                     // End permutations.                    
                     $r = expand_regexp($answer['answer']);
                     if ($r) {

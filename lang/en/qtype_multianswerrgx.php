@@ -33,6 +33,7 @@ $string['addgapslabel_help'] = 'Add cloze gaps automatically to the question tex
 $string['addgapslabelatto'] = 'No cloze gaps?';
 $string['addgapslabelatto_help'] = 'If you want to use the Automatic Add cloze gaps feature you must switch to the TinyMCE editor in your Preferences';
 $string['alternativecorrectanswers'] = 'Alternative correct answers';
+$string['developedanswer'] = 'Developed answer';
 $string['pluginname'] = 'Embedded answers with REGEXP (Clozergx)';
 $string['pluginname_help'] = 'Embedded answers with REGEXP (Clozergx) questions consist of a passage of text with questions such as multiple-choice and short answer embedded within it.';
 $string['pluginname_link'] = 'question/type/multianswerrgx';
