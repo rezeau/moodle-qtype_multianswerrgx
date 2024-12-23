@@ -234,7 +234,6 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp') {
                     $alternateq = $this->get_alternateanswers($this->questiondisplay->options->questions[$sub]);
                 }
-
                 if ($this->questiondisplay->options->questions[$sub]->qtype == 'multichoice') {
                     $mform->addElement('static', 'sub_'.$sub.'_layout',
                             get_string('layout', 'qtype_multianswer'));
@@ -242,21 +241,18 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                             get_string('shuffleanswers', 'qtype_multichoice'));
                 }
                 $answer = $this->questiondisplay->options->questions[$sub];
+                $alternateqa = [];
                 foreach ($answer->answer as $key => $ans) {
                     $mform->addElement('html', '<hr />');
                     if ($this->questiondisplay->options->questions[$sub]->qtype == 'regexp') {
-                        $alternateqa = $alternateq[($key + 1)];
+                        if (!empty($alternateq[$key]) ) {
+                            $alternateqa = $alternateq[$key];
+                        };
                         $ans0 = $ans;
                         $ans = has_permutations($ans);
                         $mform->addElement('static', 'sub_'.$sub.'_answer['.$key.']', get_string('answer', 'question').' '
                             .($key + 1).' ('.($answer->fraction[$key] * 100).'%)', $ans);
-                        if ($key !== 0 && $answer->fraction[$key] !== '0') {
-                            if ($ans !== $ans0) {
-                                $mform->addElement('html', '<div class="developedanswersrgx">');
-                                $mform->addElement('static', '', get_string('developedanswer', 'qtype_multianswerrgx')
-                                    .' ', $alternateqa['regexp']);
-                                $mform->addElement('html', '</div>');
-                            }
+                        if ($key !== 0) {
                             if (count($alternateqa['answers']) > 1) {
                                 $mform->addElement('static', '', get_string('alternativecorrectanswers', 'qtype_multianswerrgx'));
                                 $list = '';
@@ -509,8 +505,8 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
                                     if ($answercount === 1 && $subquestion->fraction[$key] < 1) {
                                         $errortext = get_string("filloutoneanswer", "qtype_regexp");
                                     }
-                                    if ($answercount > 1 && $subquestion->fraction[$key] > 0) {
-                                        $errortext = validate_regexp_subquestion($trimmedanswer);
+                                    if ($answercount > 1 /*&& $subquestion->fraction[$key] > 0*/) {
+                                        $errortext = validate_regexp_subquestion($trimmedanswer, $subquestion->fraction[$key]);
                                     }
                                     if ($errortext) {
                                         $this->_form->setElementError($prefix.'answer['.$key.']',
@@ -614,13 +610,15 @@ class qtype_multianswerrgx_edit_form extends question_edit_form {
         $alternateanswers = [];
         $i = 1;
         foreach ($answers->answer as $index => $answer) {
-            if ($answers->fraction[$index] !== 0) {
+            $errortext = validate_regexp_subquestion($answer, $answers->fraction[$index]);
+            if ($answers->fraction[$index] > 0) {
                 // This is Answer 1 :: do not process as regular expression.
                 if ($i == 1) {
                     $alternateanswers[$i]['fraction'] = (($answers->fraction[$index]) * 100).'%';
                     $alternateanswers[$i]['regexp'] = $answer;
                     $alternateanswers[$i]['answers'][] = $answer;
                 } else {
+                    $errortext = validate_regexp_subquestion($answer, $answers->fraction[$index]);
                     // JR added permutations OCT 2012.
                     $answer = has_permutations($answer);
                     // End permutations.

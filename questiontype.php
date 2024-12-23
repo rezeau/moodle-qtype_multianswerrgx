@@ -928,7 +928,7 @@ function qtype_multianswerrgx_validate_question(stdClass $question): array {
  *
  * @return string The error text describing any validation issues found. If no errors are found, an empty string is returned.
  */
-function validate_regexp_subquestion($answer) {
+function validate_regexp_subquestion($answer, $grade) {
     $trimmedanswer = trim($answer);
     $parenserror = '';
     $metacharserror = '';
@@ -948,9 +948,12 @@ function validate_regexp_subquestion($answer) {
         $markedline = $parenserror;
         $error = get_string("regexperrorparen", "qtype_regexp").'<br />';
     }
-    $metacharserror = check_unescaped_metachars($trimmedanswer, $markedline);
-    if ($metacharserror) {
-        $error .= get_string("illegalcharacters", "qtype_regexp", $illegalmetacharacters);
+    // We only check metachars when answer grade is not null.
+    if ($grade >0) {
+        $metacharserror = check_unescaped_metachars($trimmedanswer, $markedline);
+        if ($metacharserror) {
+            $error .= get_string("illegalcharacters", "qtype_regexp", $illegalmetacharacters);
+        }
     }
     if ($metacharserror || $parenserror) {
         $answerstringchunks = splitstring ($trimmedanswer);
