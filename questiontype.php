@@ -922,11 +922,16 @@ function qtype_multianswerrgx_validate_question(stdClass $question): array {
     }
     return $errors;
 }
+
 /**
- * Check the regexp sub-question answers are valid. Adapted from regexp/locallib.php
- @param string $answer The sub-question answer to be validated. It is expected to be a regular expression.
+ * Validates a regular expression answer for syntax errors.
  *
- * @return string The error text describing any validation issues found. If no errors are found, an empty string is returned.
+ * Checks for mismatched parentheses and unescaped metacharacters (if grade > 0).
+ * Returns a formatted error message or an empty string if valid.
+ *
+ * @param string $answer The answer to validate.
+ * @param float|int $grade Grade to determine metacharacter checks.
+ * @return string Error message or empty if no errors.
  */
 function validate_regexp_subquestion($answer, $grade) {
     $trimmedanswer = trim($answer);
@@ -949,7 +954,7 @@ function validate_regexp_subquestion($answer, $grade) {
         $error = get_string("regexperrorparen", "qtype_regexp").'<br />';
     }
     // We only check metachars when answer grade is not null.
-    if ($grade >0) {
+    if ($grade > 0) {
         $metacharserror = check_unescaped_metachars($trimmedanswer, $markedline);
         if ($metacharserror) {
             $error .= get_string("illegalcharacters", "qtype_regexp", $illegalmetacharacters);

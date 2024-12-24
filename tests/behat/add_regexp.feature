@@ -70,22 +70,22 @@ Feature: Test creating a Multianswer (Cloze) question with REGEXP sub-question a
     Then I should see "Start with a capital letter"
 
   Scenario: Create a Cloze question with REGEXP sub-question with permutations and Preview it
-    # Note: it's not possible to generate permutations in the multianswer question; we use a full-blown regular expression.
     When I am on the "Course 1" "core_question > course question bank" page logged in as teacher
     And I press "Create a new question ..."
     And I set the field "Embedded answers with REGEXP (Clozergx)" to "1"
     And I click on "Add" "button" in the "Choose a question type to add" "dialogue"
     And I set the field "Question name" to "multianswer-01"
-    And I set the field "Question text" to "The French flag is {1:REGEXP:%100%blue, white and red#Congratulations!~%0%--.*blue.*#Missing blue!~%100%(blue, white(,| and) red|blue, red(,| and) white|white, red(,| and) blue|white, blue(,| and) red|red, blue(,| and) white|red, white(,| and) blue)#One of the 12 accepted answers}."
+    And I set the field "Question text" to "The French flag is {1:REGEXP:%100%blue, white and red#Congratulations!~%0%--.*blue.*#Missing blue!~%100%[[_blue_, _white_(,| and) _red_]]#One of the 12 accepted answers}."
     And I set the field "General feedback" to "The general feedback."
     And I press "id_analyzequestion"
     When I click on "collapseElement-1" "link"
     Then I should see "Answer 3"
-    And I should see "(blue, white(,| and) red|blue, red(,| and) white|white, red(,| and) blue|white, blue(,| and) red|red, blue(,| and) white|red, white(,| and) blue)"
+    And I should see "Developed answer"
+    And I should see "(blue, white(,| and) red|blue, red(,| and) white|white, blue(,| and) red|white, red(,| and) blue|red, blue(,| and) white|red, white(,| and) blue)"
+    And I should see "Alternative correct answers"
     And I should see "red, white and blue"
     And I should see "One of the 12 accepted answers"
     And I press "id_submitbutton"
-
     Then I should see "multianswer-01" in the "categoryquestions" "table"
 
     # Preview it.

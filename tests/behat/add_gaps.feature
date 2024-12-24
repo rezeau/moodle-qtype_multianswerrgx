@@ -54,7 +54,9 @@ Feature: Test creating a Multianswerrgx (Cloze) question with the create gaps fe
     And I press "id_button_group_add_gaps_5"
     Then the field "Question text" matches multiline:
     """
-    <h5>The story of a poor boy who made his fortune.</h5><p>Once upon a time, {1:SA:=many} hundreds of years ago, {1:SA:=lived} a poor boy named {1:SA:=Dick} Whittington. He was an {1:SA:=orphan} and had little in {1:SA:=the} way of comfort, but {1:SA:=he} was a bright, hopeful {1:SA:=lad}, and he had heard {1:SA:=stories} of a place which {1:SA:=had} been called London, a {1:SA:=city} said to be so {1:SA:=rich} that its streets were {1:SA:=paved} with gold.</p><p>Dreaming of a better {1:SA:=life}, young Dick decided to {1:SA:=leave} his small village and {1:SA:=set} off on foot for {1:SA:=London}.</p>
+    <h5>The story of a poor boy who made his fortune.</h5>
+    <p>Once upon a time, {1:SA:=many} hundreds of years ago, {1:SA:=lived} a poor boy named {1:SA:=Dick} Whittington. He was an {1:SA:=orphan} and had little in {1:SA:=the} way of comfort, but {1:SA:=he} was a bright, hopeful {1:SA:=lad}, and he had heard {1:SA:=stories} of a place which {1:SA:=had} been called London, a {1:SA:=city} said to be so {1:SA:=rich} that its streets were {1:SA:=paved} with gold.</p>
+    <p>Dreaming of a better {1:SA:=life}, young Dick decided to {1:SA:=leave} his small village and {1:SA:=set} off on foot for {1:SA:=London}.</p>
     """
 
     ## Try to add gaps to question text already containing gaps.
