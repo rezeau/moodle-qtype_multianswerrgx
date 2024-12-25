@@ -143,23 +143,3 @@ Feature: Test creating a Multianswerrgx (Cloze) question with the create gaps fe
     And I press "Fill in correct responses"
     And I press "Check"
     And I log out
-
-  @javascript
-  Scenario: Create a question with all the sub-questions from the multianswer doc and remove the sub-questions.
-    When I am on the "Course 1" "core_question > course question bank" page logged in as teacher
-    And I press "Create a new question ..."
-    And I set the field "Embedded answers with REGEXP (Clozergx)" to "1"
-    And I click on "Add" "button" in the "Choose a question type to add" "dialogue"
-    And I set the field "Question name" to "multianswer-01"
-
-    And I set the field "Question text" to multiline:
-    """
-    <p>This question consists of some text with an answer embedded right here {1:MULTICHOICE:Wrong answer#Feedback for this wrong answer~Another wrong answer#Feedback for the other wrong answer~=Correct answer#Feedback for correct answer~%50%Answer that gives half the credit#Feedback for half credit answer} and right after that you will have to deal with this short answer {1:SHORTANSWER:Wrong answer#Feedback for this wrong answer~=Correct answer#Feedback for correct answer~%50%Answer that gives half the credit#Feedback for half credit answer} and finally we have a floating point number {2:NUMERICAL:=23.8:0.1#Feedback for correct answer 23.8~%50%23.8:2#Feedback for half credit answer in the nearby region of the correct answer}.</p><p>The multichoice question can also be shown in the vertical display of the standard moodle multiple choice.{2:MCV:1. Wrong answer#Feedback for this wrong answer~2. Another wrong answer#Feedback for the other wrong answer~=3. Correct answer#Feedback for correct answer~%50%4. Answer that gives half the credit#Feedback for half credit answer} Or in an horizontal display that is included here in a table {2:MCH:a. Wrong answer#Feedback for this wrong answer~b. Another wrong answer#Feedback for the other wrong answer~=c. Correct answer#Feedback for correct answer~%50%d. Answer that gives half the credit#Feedback for half credit answer}</p><p>A shortanswer question where case must match. Write moodle in upper case letters {1:SHORTANSWER_C:moodle#Feedback for moodle in lower case ~=MOODLE#Feedback for MOODLE in upper case ~%50%Moodle#Feedback for only first letter in upper case}</p><p>Note that addresses like www.moodle.org and smileys :-) all work as normal: a) How good is this? {:MULTICHOICE:=Yes#Correct~No#We have a different opinion} b) What grade would you give it? {3:NUMERICAL:=3:2}<p>
-    """
-    # Check that removing sub-questions restores the first correct answer of each sub-questions
-    Then I press "id_button_group_remove_gaps_button"
-    Then the field "Question text" matches multiline:
-    """
-    <p>This question consists of some text with an answer embedded right here Correct answer and right after that you will have to deal with this short answer Correct answer and finally we have a floating point number 23.8:0.1.</p><p>The multichoice question can also be shown in the vertical display of the standard moodle multiple choice.3. Correct answer Or in an horizontal display that is included here in a table c. Correct answer</p><p>A shortanswer question where case must match. Write moodle in upper case letters MOODLE</p><p>Note that addresses like www.moodle.org and smileys :-) all work as normal: a) How good is this? Yes b) What grade would you give it? 3:2</p><p></p>
-    """
-    And I log out

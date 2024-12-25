@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_multianswerrgx';
-$plugin->version   = 2024121600;
+$plugin->version   = 2024122500;
 
 $plugin->requires  = 2024041600;
 $plugin->dependencies = [
@@ -35,5 +35,5 @@ $plugin->dependencies = [
     'qtype_numerical'   => 2024041600,
     'qtype_shortanswer' => 2024041600,
 ];
-$plugin->release   = '4.5.0';
+$plugin->release   = '4.5.2';
 $plugin->maturity  = MATURITY_STABLE;
