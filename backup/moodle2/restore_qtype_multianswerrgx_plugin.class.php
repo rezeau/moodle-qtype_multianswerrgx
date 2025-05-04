@@ -230,4 +230,33 @@ class restore_qtype_multianswerrgx_plugin extends restore_qtype_plugin {
         return implode(',', $resultarr);
     }
 
+    /**
+     * Returns a list of identity hash fields that should be excluded.
+     *
+     * @return array List of JSON pointer strings to be excluded from identity hash calculation.
+     */
+    #[\Override]
+    public function define_excluded_identity_hash_fields(): array {
+        return [
+            '/options/sequence',
+            '/options/question',
+        ];
+    }
+
+    /**
+     * Removes question-related data from the given question data object
+     * based on exclusion rules.
+     *
+     * @param stdClass $questiondata    The question data object to process.
+     * @param array    $excludefields   Optional list of fields to exclude.
+     *
+     * @return stdClass The modified question data object with excluded fields removed.
+     */
+    #[\Override]
+    public static function remove_excluded_question_data(stdClass $questiondata, array $excludefields = []): stdClass {
+        if (isset($questiondata->options->questions)) {
+            unset($questiondata->options->questions);
+        }
+        return parent::remove_excluded_question_data($questiondata, $excludefields);
+    }
 }

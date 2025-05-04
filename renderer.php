@@ -114,8 +114,8 @@ class qtype_multianswerrgx_renderer extends qtype_renderer {
      * @return string HTML for the rendered subquestion or an error message.
      * @throws coding_exception If an unexpected subquestion type is encountered.
      */
-    public function subquestion(question_attempt $qa,
-            question_display_options $options, $index, question_automatically_gradable $subq) {
+    public function subquestion(question_attempt $qa, question_display_options $options,
+        $index, question_automatically_gradable $subq) {
 
         $subtype = $subq->qtype->name();
         if ($subtype == 'numerical' || $subtype == 'shortanswer' || $subtype == 'regexp') {
@@ -262,12 +262,12 @@ abstract class qtype_multianswerrgx_subq_renderer_base extends qtype_renderer {
             'role' => 'button',
             'tabindex' => 0,
             'class' => 'feedbacktrigger btn btn-link p-0',
-            'data-toggle' => 'popover',
-            'data-container' => 'body',
-            'data-content' => $feedbackcontents,
-            'data-placement' => 'right',
-            'data-trigger' => 'hover focus',
-            'data-html' => 'true',
+            'data-bs-toggle' => 'popover',
+            'data-bs-container' => 'body',
+            'data-bs-content' => $feedbackcontents,
+            'data-bs-placement' => 'right',
+            'data-bs-trigger' => 'hover focus',
+            'data-bs-html' => 'true',
         ]);
     }
 
@@ -365,7 +365,7 @@ class qtype_multianswerrgx_textfield_renderer extends qtype_multianswerrgx_subq_
             'value' => $response,
             'id' => $qa->get_qt_field_name($fieldname),
             'size' => $size,
-            'class' => 'form-control mb-1',
+            'class' => 'form-control d-inline mb-1',
         ];
         if ($options->readonly) {
             $inputattributes['readonly'] = 'readonly';
@@ -388,7 +388,7 @@ class qtype_multianswerrgx_textfield_renderer extends qtype_multianswerrgx_subq_
                         $qa, 'question', 'answerfeedback', $matchinganswer->id),
                 s($correctanswer->answer), $options);
 
-        $output = html_writer::start_tag('span', ['class' => 'subquestion form-inline d-inline']);
+        $output = html_writer::start_tag('span', ['class' => 'subquestion']);
 
         $output .= html_writer::tag('label', $this->get_answer_label(),
                 ['class' => 'subq accesshide', 'for' => $inputattributes['id']]);
@@ -442,6 +442,7 @@ class qtype_multianswerrgx_multichoice_inline_renderer
 
         $inputattributes = [
             'id' => $qa->get_qt_field_name($fieldname),
+            'class' => 'form-select d-inline-block mb-1',
         ];
         if ($options->readonly) {
             $inputattributes['disabled'] = 'disabled';
@@ -719,6 +720,7 @@ class qtype_multianswerrgx_multiresponse_vertical_renderer extends qtype_multian
         $inputattributes = [
             'type' => 'checkbox',
             'value' => 1,
+            'class' => 'form-check-input',
         ];
         if ($options->readonly) {
             $inputattributes['disabled'] = 'disabled';
